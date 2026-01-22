@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-neutral-100 block max-w-sm p-6 border border-default rounded-base shadow-xs">
+    <div class="bg-neutral-100 block max-w-sm p-6 border border-default rounded-base shadow-xs mb-4">
         <div class="flex justify-between mb-2">
             <div>
                 <FButton @click="monthdown" color="tertiary">
@@ -21,7 +21,7 @@
                 </FButton>
             </div>
         </div>
-        <table class="w-full">
+        <table class="w-full mb-4 table-fixed">
             <thead>
                 <tr class="mb-2">
                     <th>Mon</th>
@@ -34,14 +34,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="rown in 5" class="mb-1">
+                <tr v-for="rown in 6" class="mb-2">
                     <td v-for="dayn in 7">
-
-                        <CalendarCell :item="cmsdays[ (rown - 1) * 7 + dayn]"></CalendarCell>
+                        <a @click.prevent="event_clicked">
+                            <CalendarCell :item="cmsdays[ (rown - 1) * 7 + dayn]"></CalendarCell>
+                        </a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="grid grid-cols-2">
+            <div v-for="timetable in timetables" class="flex items-center">
+                <a @click.prevent="event_clicked">
+                    <CalButton :color="timetable.Color" class="mr-2">&nbsp;</CalButton> 
+                </a>
+                <a @click.prevent="event_clicked">
+                    {{ timetable.Title }}
+                </a>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -50,10 +61,16 @@
     import ky from 'ky';
     import FButton from '../flowbite/FButton.vue';
     import CalendarCell from './CalendarCell.vue';
+    import CalButton from '../flowbite/CalButton.vue';
 
     // Contains all the entries for the calendar table
     // 5x7 = 35 entries. 
     const cmsdays = ref(Array(35).fill(null));
+
+    // Contains entry for each different colour
+    // in the month. Assumes (doesn't check) that all
+    // Timetable and Title fields are the same.
+    const timetables = ref({});
 
     // Beware, January = 0.
     const props = defineProps({
@@ -67,6 +84,13 @@
 
     function monthup() {
         console.log('up');
+    }
+
+    /**
+     * One of the event buttons has been clicked
+     */
+    function event_clicked() {
+        console.log('Event clicked');
     }
 
     /**
@@ -84,7 +108,9 @@
      */
     const firstday = computed(() => {
         const date = new Date(props.year, props.month, 1);
-        return date.getDay();
+        const daynum = date.getDay();
+
+        return daynum;
     });
 
     /**
@@ -108,6 +134,7 @@
 
     /**
      * Number of days in the month
+     * January == 0
      */
     const daysinmonth = computed(() => {
         const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -118,41 +145,6 @@
             return daycount;
         }
     });
-
-    /**
-     * Create month array
-     */
-    const monthdays = computed(() => {
-        const days = [];
-
-        // Pad to first day of month
-        // 0 == Sunday
-        const padding = firstday.value === 0 ? 6 : firstday.value - 1;
-    });
-
-    /**
-     * Work out what to display in date cell.
-     */
-    function datecontent(dayn) {
-
-        // Work out day of month. 
-        // If out of range, then just null
-        let dom = null;
-        if (dayn >= firstday.value) {
-            dom = dayn - firstday.value + 1;
-            if (dom > daysinmonth.value) {
-                dom = null;
-            }
-        }
-
-        if ((dom != null) && (dom in cmsdays)) {
-            return cmsdays[dom];
-        } else {
-            return {
-                daynum: dom,
-            };
-        }
-    }
 
     // Fill cmsdays array with entries for each day. May contain
     // * null (if outside of the month)
@@ -165,7 +157,8 @@
 
         // Fill array with valid day numbers
         let day = 1;
-        for (let i = firstday.value; i < daysinmonth.value + firstday.value; i++) {
+        const padding = firstday.value === 0 ? 6 : firstday.value - 1;
+        for (let i = padding + 1; i < daysinmonth.value + padding + 1; i++) {
             cmsdays.value[i] = {daynum: day++};
         }
 
@@ -175,10 +168,18 @@
             // 2026-12-01
             const daynum = Number(item.date.substring(8));
             item['daynum'] = daynum;
-            cmsdays.value[daynum + firstday.value - 1] = item;
+            cmsdays.value[daynum + padding] = item;
         });
+    }
 
-        console.log(cmsdays.value);
+    /**
+     * Get unique list of colors / descriptions 
+     */
+    function fill_timetable(items) {
+        timetables.value = {};
+        items.forEach(item => {
+            timetables.value[item.Color] = item;
+        });
     }
 
     onMounted(() => {
@@ -196,8 +197,8 @@
 
         ky.get(endpoint + '/items/Calendar?limit=-1&filter=' + JSON.stringify(filter)).json()
         .then(result => {
-            console.log(result);
             fill_cmsdays(result.data);
+            fill_timetable(result.data);
         })
         .catch(error => {
             console.error(error);

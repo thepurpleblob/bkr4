@@ -2,9 +2,9 @@
     <CalButton v-if="item && item.Color" :color="item.Color">
         {{ item.daynum }}
     </CalButton>
-    <FButton v-if="item && item.daynum && !item.Color" color="tertiary">
+    <CalButton v-if="item && item.daynum && !item.Color" color="default">
         {{ item.daynum }}
-    </FButton>
+    </CalButton>
 </template>
 
 <script setup>

@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto">
         <PageHeader></PageHeader>
-        <main class="mt-40">
+        <main class="mt-45">
           <RouterView></RouterView>
         </main>
     </div>
