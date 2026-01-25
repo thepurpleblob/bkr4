@@ -1,11 +1,10 @@
 <template>
-    <div class="container mx-auto">
+    <div class="container mx-auto font-[Johnston100]">
         <PageHeader></PageHeader>
         <main class="mt-45">
           <RouterView></RouterView>
         </main>
     </div>
-
 
 </template>
 

@@ -4,3 +4,54 @@
 
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+
+@font-face {
+    font-family: "Moma";
+    src: local('Moma'), url('@/assets/fonts/moma-sans__regular.woff2') format('woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Moma";
+    src: local('Moma'), url('@/assets/fonts/moma-sans__regular--italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Moma";
+    src: local('Moma'), url('@/assets/fonts/moma-sans__bold.woff2') format('woff2');
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "Moma";
+    src: local('Moma'), url('@/assets/fonts/moma-sans__bold--italic.woff2') format('woff2');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Johnston100";
+    src: url('@/assets/fonts/Johnston100_Regular.woff2') format('woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Johnston100";
+    src: url('@/assets/fonts/Johnston100_Hairline.woff2') format('woff2');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Johnston100";
+    src: url('@/assets/fonts/Johnston100_Light.woff2') format('woff2');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Johnston100";
+    src: url('@/assets/fonts/Johnston100_Medium.woff2') format('woff2');
+    font-weight: 500 700;
+}
+

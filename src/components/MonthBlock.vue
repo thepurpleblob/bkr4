@@ -1,8 +1,8 @@
 <template>
-    <div class="bg-neutral-100 block max-w-sm p-6 border border-default rounded-base shadow-xs mb-4">
+    <div class="bg-neutral-100 block max-w-full md:max-w-sm p-6 border border-default rounded-base shadow-xs mb-4">
         <div class="flex justify-between mb-2">
             <div>
-                <FButton @click="monthdown" color="tertiary">
+                <FButton v-if="single" @click="monthdown" color="tertiary">
                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/>
                     </svg>
@@ -14,7 +14,7 @@
                 </FButton>
             </div>
             <div>
-                <FButton @click="monthup" color="tertiary">
+                <FButton v-if="single" @click="monthup" color="tertiary">
                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
                     </svg>
@@ -36,7 +36,7 @@
             <tbody>
                 <tr v-for="rown in 6" class="mb-2">
                     <td v-for="dayn in 7">
-                        <a @click.prevent="event_clicked">
+                        <a @click.prevent="event_clicked(cmsdays[ (rown - 1) * 7 + dayn])">
                             <CalendarCell :item="cmsdays[ (rown - 1) * 7 + dayn]"></CalendarCell>
                         </a>
                     </td>
@@ -45,10 +45,10 @@
         </table>
         <div class="grid grid-cols-2">
             <div v-for="timetable in timetables" class="flex items-center">
-                <a @click.prevent="event_clicked">
+                <a @click.prevent="event_clicked(timetable)">
                     <CalButton :color="timetable.Color" class="mr-2">&nbsp;</CalButton> 
                 </a>
-                <a @click.prevent="event_clicked">
+                <a @click.prevent="event_clicked(timetable)">
                     {{ timetable.Title }}
                 </a>
             </div>
@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-    import { ref, defineProps, onMounted, computed } from 'vue';
+    import { ref, defineProps, defineEmits, onMounted, computed, watch } from 'vue';
     import ky from 'ky';
     import FButton from '../flowbite/FButton.vue';
     import CalendarCell from './CalendarCell.vue';
@@ -76,21 +76,28 @@
     const props = defineProps({
         month: Number,
         year: Number,
+        single: Boolean,
     });
 
+    const emits = defineEmits([
+        'eventclick',
+        'monthup',
+        'monthdown',
+    ]);
+
     function monthdown() {
-        console.log('down');
+        emits('monthdown');
     }
 
     function monthup() {
-        console.log('up');
+        emits('monthup');
     }
 
     /**
      * One of the event buttons has been clicked
      */
-    function event_clicked() {
-        console.log('Event clicked');
+    function event_clicked(item) {
+        emits('eventclick', item);
     }
 
     /**
@@ -182,7 +189,17 @@
         });
     }
 
-    onMounted(() => {
+    /**
+     * Watch for month or year changing
+     */
+    watch (() => props.month, () => {
+        load_month_data();
+    });
+
+    /**
+     * Load data for month
+     */
+    function load_month_data() {
         const endpoint = import.meta.env.VITE_CMS_ENDPOINT;
 
         // Filter to only get this year's calendar entries
@@ -203,5 +220,9 @@
         .catch(error => {
             console.error(error);
         });
+    }
+
+    onMounted(() => {
+        load_month_data();
     });
 </script>

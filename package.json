@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
+    "@vueuse/core": "^14.1.0",
     "flowbite": "^4.0.1",
     "ky": "^1.14.2",
     "tailwindcss": "^4.1.18",
