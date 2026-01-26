@@ -8,6 +8,7 @@
 
     const props = defineProps({
         filename: String,
+        width: Number,
     });
 
     const file = ref({});
@@ -16,7 +17,12 @@
     const imageurl = computed(() => {
         const endpoint = import.meta.env.VITE_CMS_ENDPOINT;
 
-        return endpoint + '/assets/' + props.filename + '/' + file.value.filename_download + '?download';
+        let widthtrans = '';
+        if (props.width) {
+            widthtrans = '&width=' + props.width
+        }
+
+        return endpoint + '/assets/' + props.filename + '/' + file.value.filename_download + '?download' + widthtrans;
     });
 
     watch(() => props.filename, () => {

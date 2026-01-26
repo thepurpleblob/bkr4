@@ -46,7 +46,7 @@
         <div class="grid grid-cols-2">
             <div v-for="timetable in timetables" class="flex items-center">
                 <a @click.prevent="event_clicked(timetable)">
-                    <CalButton :color="timetable.Color" class="mr-2">&nbsp;</CalButton> 
+                    <CalButton :color="timetable.Color" :value="timetable.Title" class="mr-2">&nbsp;</CalButton> 
                 </a>
                 <a @click.prevent="event_clicked(timetable)">
                     {{ timetable.Title }}

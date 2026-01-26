@@ -6,7 +6,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
                     <h3 class="text-lg font-medium text-heading">
-                        <CalButton :color="color" class="mr-2">&nbsp;</CalButton>
+                        <CalButton :color="color" :value="timetable.Title" class="mr-2">&nbsp;</CalButton>
                         {{ timetable.Title }}
                     </h3>
                     <button type="button" class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="timetable-modal" @click="close_modal">
@@ -17,13 +17,13 @@
                 <!-- Modal body -->
                 <div class="space-y-4 md:space-y-6 py-4 md:py-6 overflow-x-auto">
                     <div>
-                        <CmsImage :filename="timetable.image" />
+                        <CmsImage :filename="timetable.image" :width="600"/>
                     </div>
                     <table class="w-full text-left">
                         <thead class="bg-neutral-secondary-soft border-b border-default">
                             <tr>
-                                <th scope="col" >&nbsp;</th>
-                                <th scope="col" >&nbsp;</th>
+                                <td scope="col" >&nbsp;</td>
+                                <td scope="col" >&nbsp;</td>
                                 <th v-for="service in timetable.Service" scope="col">{{ service.Traction }}</th>
                             </tr>
                         </thead>
@@ -82,8 +82,6 @@
             </div>
         </div>
     </div>
-
-    <div>{{ props.show }}</div>
 </template>
 
 <script setup>
@@ -154,7 +152,6 @@
 
         ky.get(endpoint + '/items/Timetable/' + props.id).json()
         .then(result => {
-            console.log(result);
             timetable.value = result.data;
         })
         .catch(error => {
@@ -163,7 +160,6 @@
     }
 
     watch(() => props.show, (newshow) => {
-        console.log('Show is now ', newshow);
 
         // set the modal menu element
         const $targetEl = document.getElementById('timetable-modal');

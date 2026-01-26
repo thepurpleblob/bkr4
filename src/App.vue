@@ -2,7 +2,7 @@
     <div class="container mx-auto font-[Johnston100]">
         <PageHeader></PageHeader>
         <main class="mt-45">
-          <RouterView></RouterView>
+            <RouterView></RouterView>
         </main>
     </div>
 

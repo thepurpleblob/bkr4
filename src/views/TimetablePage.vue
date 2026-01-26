@@ -1,4 +1,5 @@
 <template>
+    <h1>Timetables</h1>
     <div v-if="singlemonth && year">
         <MonthBlock :year="year" :month="monthnow" :single="true" @eventclick="event_clicked" @monthup="monthup" @monthdown="monthdown"></MonthBlock>
     </div>
@@ -43,7 +44,6 @@
     }
 
     function event_clicked(item) {
-        console.log('Event clicked TT', item);
         timetableid.value = item.Timetable;
         color.value = item.Color;
         showmodal.value = true;

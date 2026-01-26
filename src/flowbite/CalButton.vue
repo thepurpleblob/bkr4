@@ -1,5 +1,5 @@
 <template>
-    <button type="button" :class="classes" class="w-12 text-body border border-default hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+    <button type="button" :title="props.value" :class="classes" class="w-12 text-body border border-default hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
         <slot></slot>
     </button>
 </template>
@@ -9,6 +9,10 @@
 
     const props = defineProps({
         color: {
+            type: String,
+            default: '',
+        },
+        value: {
             type: String,
             default: '',
         },
