@@ -8,22 +8,9 @@
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
-                <li>
-                    <RouterLink v-if="active == 'HomePage'" to="/" :class="activecss" aria-current="page">Home</RouterLink>
-                    <RouterLink v-else to="/" :class="inactivecss" >Home</RouterLink>
-                </li>
-                <li>
-                    <RouterLink v-if="active == 'TimetablePage'" to="/timetable" :class="activecss">Timetables</RouterLink>
-                    <RouterLink v-else="active == 'TimetablePage'" to="/timetable" :class="inactivecss">Timetables</RouterLink>
-                </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Plan your visit</a>
-                </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Events</a>
-                </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Something special</a>
+                <li v-for="item in menu">
+                    <RouterLink v-if="active == item.name" :to="item.link" :class="activecss" aria-current="page">{{ item.display }}</RouterLink>
+                    <RouterLink v-else :to="item.link" :class="inactivecss" >{{ item.display }}</RouterLink>                    
                 </li>
             </ul>
             </div>
@@ -42,6 +29,34 @@
 
     const activecss = "block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0";
     const inactivecss = "block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent";
+
+    const menu = [
+        {
+            name: 'HomePage',
+            link: '/',
+            display: 'Home',
+        },
+        {
+            name: 'TimetablePage',
+            link: '/timetable',
+            display: 'Timetable',
+        },
+        {
+            name: 'PlanPage',
+            link: '/plan',
+            display: 'Plan your visit',
+        },
+        {
+            name: 'EventsPage',
+            link: '/events',
+            display: 'Events',
+        },
+        {
+            name: 'SpecialPage',
+            link: '/special',
+            display: 'Something special',
+        }
+    ]
 
     watch(() => route.name, () => {
         const $targetEl = document.getElementById('navbar-default');

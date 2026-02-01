@@ -11,6 +11,11 @@ const routes = [
     name: 'TimetablePage',
     component: () => import('@/views/TimetablePage.vue')
   },
+  {
+    path: '/page/:slug',
+    name: 'PagePage',
+    component: () => import('@/views/PagePage.vue')
+  },
 
   /*
   {

@@ -7,7 +7,7 @@
         <MonthBlock v-for="month in 12" :year="year" :month="month - 1" :single="false" @eventclick="event_clicked"></MonthBlock>
     </div>
 
-    <TimetableModal :show="showmodal" :id="timetableid" :single="singlemonth" :color="color" @close="showmodal = false"></TimetableModal>
+    <TimetableModal :show="showmodal" :id="timetableid" :title="itemtitle" :single="singlemonth" :color="color" @close="showmodal = false"></TimetableModal>
 </template>
 
 <script setup>
@@ -21,6 +21,7 @@
     const showmodal = ref(false);
     const timetableid = ref(0);
     const color = ref('');
+    const itemtitle = ref('');
     const { width, height } = useWindowSize();
 
     const singlemonth = computed(() => {
@@ -46,6 +47,7 @@
     function event_clicked(item) {
         timetableid.value = item.Timetable;
         color.value = item.Color;
+        itemtitle.value = item.Title;
         showmodal.value = true;
     }
 

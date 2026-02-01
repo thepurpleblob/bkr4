@@ -7,7 +7,8 @@
                 <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
                     <h3 class="text-lg font-medium text-heading">
                         <CalButton :color="color" :value="timetable.Title" class="mr-2">&nbsp;</CalButton>
-                        {{ timetable.Title }}
+                        <span v-if="id">{{ timetable.Title }}</span>
+                        <span v-else>{{ title }}</span>
                     </h3>
                     <button type="button" class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="timetable-modal" @click="close_modal">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/></svg>
@@ -19,7 +20,7 @@
                     <div>
                         <CmsImage :filename="timetable.image" :width="600"/>
                     </div>
-                    <table class="w-full text-left">
+                    <table v-if="timetable.Service" class="w-full text-left">
                         <thead class="bg-neutral-secondary-soft border-b border-default">
                             <tr>
                                 <td scope="col" >&nbsp;</td>
@@ -73,7 +74,22 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p>{{ timetable.Info }}</p>
+                    <div class="flex justify-center">
+                        <div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-medium">
+                            <p v-if="id">{{ timetable.Info }}</p>
+                            <p v-else>Information will be available soon.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Link to additional info -->
+                    <div  class="flex gap-2 justify-center">
+                        <RouterLink v-if="timetable.link" :to="timetable.link" @click="emits('close')">
+                            <FButton color="success">Learn more...</FButton>
+                        </RouterLink>
+                        <a v-if="timetable.ticketlink" :href="timetable.ticketlink" @click="emits('close')" target="_digitickets">
+                            <FButton color="danger">Book now...</FButton>
+                        </a>
+                    </div>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center border-t border-default space-x-4 pt-4 md:pt-5">
@@ -86,6 +102,7 @@
 
 <script setup>
     import { ref, defineProps, defineEmits, watch, computed } from 'vue';
+    import { RouterLink } from 'vue-router';
     import ky from 'ky';
     import { Modal } from 'flowbite';
     import FButton from './FButton.vue';
@@ -95,6 +112,7 @@
     const props = defineProps({
         show: Boolean,
         id: Number,
+        title: String,
         single: Boolean,
         color: String,
     });
@@ -153,6 +171,7 @@
         ky.get(endpoint + '/items/Timetable/' + props.id).json()
         .then(result => {
             timetable.value = result.data;
+            console.log(timetable.value);
         })
         .catch(error => {
             console.log(error);
@@ -170,7 +189,9 @@
 
         if (newshow) {
             modal.show();
-            get_timetable();
+            if (props.id) {
+                get_timetable();
+            }
         } else {
             modal.hide();
         }
