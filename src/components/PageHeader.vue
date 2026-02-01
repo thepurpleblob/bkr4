@@ -55,6 +55,11 @@
             name: 'SpecialPage',
             link: '/special',
             display: 'Something special',
+        },
+        {
+            name: 'AboutPage',
+            link: '/page/about',
+            display: 'About us',
         }
     ]
 

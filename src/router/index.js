@@ -16,6 +16,16 @@ const routes = [
     name: 'PagePage',
     component: () => import('@/views/PagePage.vue')
   },
+  {
+    path: '/events',
+    name: 'EventsPage',
+    component: () => import('@/views/EventsPage.vue')
+  },
+  {
+    path: '/special',
+    name: 'SpecialPage',
+    component: () => import('@/views/SpecialPage.vue')
+  },
 
   /*
   {
@@ -42,22 +52,7 @@ const routes = [
     name: 'NewsItems',
     component: () => import('@/views/NewsItems.vue')
   },
-  {
-    path: '/events',
-    name: 'EventsList',
-    component: () => import('@/views/EventsList.vue')
-  },
-  {
-    path: '/special',
-    name: 'SpecialList',
-    component: () => import('@/views/SpecialList.vue')
-  },
-  {
-    path: '/thomas',
-    redirect: '/page/thomas'
-    //name: 'ThomasEvent',
-    //component: () => import( '@/views/ThomasEvent.vue')
-  },
+
   */
 ]
 

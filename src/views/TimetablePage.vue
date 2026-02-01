@@ -1,10 +1,10 @@
 <template>
-    <h1>Timetables</h1>
+    <h1 class="text-center text-4xl font-bold text-heading">TIMETABLE</h1>
     <div v-if="singlemonth && year">
         <MonthBlock :year="year" :month="monthnow" :single="true" @eventclick="event_clicked" @monthup="monthup" @monthdown="monthdown"></MonthBlock>
     </div>
     <div v-if="year && !singlemonth" class="mt-2 grid grid-cols-2 lg:grid-cols-3 gap-4 container">
-        <MonthBlock v-for="month in 12" :year="year" :month="month - 1" :single="false" @eventclick="event_clicked"></MonthBlock>
+        <MonthBlock v-for="month in monthlist" :year="month.year" :month="month.month" :single="false" @eventclick="event_clicked"></MonthBlock>
     </div>
 
     <TimetableModal :show="showmodal" :id="timetableid" :title="itemtitle" :single="singlemonth" :color="color" @close="showmodal = false"></TimetableModal>
@@ -23,6 +23,7 @@
     const color = ref('');
     const itemtitle = ref('');
     const { width, height } = useWindowSize();
+    const monthlist = ref([]);
 
     const singlemonth = computed(() => {
         return width.value < 500;
@@ -56,6 +57,20 @@
         const date = new Date;
         year.value = date.getFullYear();
         monthnow.value = date.getMonth();
+
+        // Get 12 months from now.
+        for (let i = 0; i <= 11; i++) {
+            let iyear = year.value;
+            let imonth = monthnow.value + i;
+            if (imonth > 11) {
+                iyear++;
+                imonth = imonth - 12;
+            }
+            monthlist.value.push({
+                month: imonth,
+                year: iyear,
+            });
+        }
     })
 
 </script>

@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-    import { ref, defineProps, watch, computed } from 'vue';
+    import { ref, defineProps, watch, computed, onMounted } from 'vue';
     import ky from 'ky';
 
     const props = defineProps({
@@ -25,7 +25,10 @@
         return endpoint + '/assets/' + props.filename + '/' + file.value.filename_download + '?download' + widthtrans;
     });
 
-    watch(() => props.filename, () => {
+    /**
+     * Load file info from CMS
+     */
+    function get_file(filename) {
         const endpoint = import.meta.env.VITE_CMS_ENDPOINT;
 
         loading.value = true;
@@ -38,6 +41,14 @@
             .catch(error => {
                 console.error(error);
             });
-        }
+        }        
+    }
+
+    watch(() => props.filename, () => {
+        get_file(props.filename);
+    });
+
+    onMounted(() => {
+        get_file(props.filename);
     });
 </script>

@@ -5,6 +5,10 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
+@plugin "daisyui" {
+    themes: all;
+}
+
 @font-face {
     font-family: "Moma";
     src: local('Moma'), url('@/assets/fonts/moma-sans__regular.woff2') format('woff2');
@@ -103,6 +107,3 @@
     @apply mb-3 text-2xl text-center tracking-tight font-semibold text-heading;
 }
 
-.bkrpage .btn {
-    @apply text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5;
-}

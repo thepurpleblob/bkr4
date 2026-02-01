@@ -171,7 +171,6 @@
         ky.get(endpoint + '/items/Timetable/' + props.id).json()
         .then(result => {
             timetable.value = result.data;
-            console.log(timetable.value);
         })
         .catch(error => {
             console.log(error);
