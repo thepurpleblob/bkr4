@@ -32,22 +32,22 @@
                             <tr>
                                 <th>Bo'ness</th>
                                 <td>{{ d }}</td>
-                                <td v-for="service in timetable.Service" class="font-mono">{{ t(service.UpBoness) }}</td>
+                                <td v-for="service in timetable.Service" class="font-[JetBrainsMono]">{{ t(service.UpBoness) }}</td>
                             </tr>
                             <tr>
                                 <th>Kinneil</th>
                                 <td>{{ d }}</td>
-                                <td v-for="service in timetable.Service" class="font-mono">{{ t(service.UpKinneil) }}</td>
+                                <td v-for="service in timetable.Service" class="font-[JetBrainsMono]">{{ t(service.UpKinneil) }}</td>
                             </tr>
                             <tr>
                                 <th>Birkhill</th>
                                 <td>{{ d }}</td>
-                                <td v-for="service in timetable.Service" class="font-mono">{{ t(service.UpBirkhill) }}</td>
+                                <td v-for="service in timetable.Service" class="font-[JetBrainsMono]">{{ t(service.UpBirkhill) }}</td>
                             </tr>
                             <tr>
                                 <th>Manuel</th>
                                 <td>{{ a }}</td>
-                                <td v-for="service in timetable.Service" class="font-mono">{{ t(service.UpManuel) }}</td>
+                                <td v-for="service in timetable.Service" class="font-[JetBrainsMono]">{{ t(service.UpManuel) }}</td>
                             </tr>
                             <tr>
                                 <td :colspan="numberofservices + 2"><hr class="h-px my-4 bg-neutral-quaternary border-0"></td>
@@ -55,22 +55,22 @@
                             <tr>
                                 <th>Manuel</th>
                                 <td>{{ d }}</td>
-                                <td v-for="service in timetable.Service" class="font-mono">{{ t(service.DownManuel) }}</td>
+                                <td v-for="service in timetable.Service" class="font-[JetBrainsMono]">{{ t(service.DownManuel) }}</td>
                             </tr>
                             <tr>
                                 <th>Birkhill</th>
                                 <td>{{ d }}</td>
-                                <td v-for="service in timetable.Service" class="font-mono">{{ t(service.DownBirkhill) }}</td>
+                                <td v-for="service in timetable.Service" class="font-[JetBrainsMono]">{{ t(service.DownBirkhill) }}</td>
                             </tr>
                             <tr>
                                 <th>Kinneil</th>
                                 <td>{{ d }}</td>
-                                <td v-for="service in timetable.Service" class="font-mono">{{ t(service.DownKinneil) }}</td>
+                                <td v-for="service in timetable.Service" class="font-[JetBrainsMono]">{{ t(service.DownKinneil) }}</td>
                             </tr>
                             <tr>
                                 <th>Bo'ness</th>
                                 <td>{{ a }}</td>
-                                <td v-for="service in timetable.Service" class="font-mono">{{ t(service.DownBoness) }}</td>
+                                <td v-for="service in timetable.Service" class="font-[JetBrainsMono]">{{ t(service.DownBoness) }}</td>
                             </tr>
                         </tbody>
                     </table>

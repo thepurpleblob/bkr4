@@ -26,6 +26,11 @@ const routes = [
     name: 'SpecialPage',
     component: () => import('@/views/SpecialPage.vue')
   },
+  {
+    path: '/plan',
+    name: 'PlanPage',
+    component: () => import( '@/views/PlanPage.vue')
+  },
 
   /*
   {

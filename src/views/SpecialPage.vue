@@ -5,7 +5,7 @@
         <figure>
             <CmsImage :filename="event.Image" :width="300"></CmsImage>
         </figure>
-        <div class="card-body">
+        <div class="card-body text-base">
             <h2 class="card-title text-xl font-bold text-heading">{{ event.Title }}</h2>
             <p v-html="event.Content"></p>
             <div v-if="event.Page" class="card-actions justify-end">

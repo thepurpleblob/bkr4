@@ -1,7 +1,7 @@
 <template>
-    <div class="container mx-auto font-[Johnston100] max-w-screen-xl">
+    <div class="container mx-auto font-[SourceSansPro] max-w-screen-xl">
         <PageHeader></PageHeader>
-        <main class="mt-45">
+        <main class="mt-45 px-3">
             <RouterView></RouterView>
         </main>
         <PageFooter></PageFooter>

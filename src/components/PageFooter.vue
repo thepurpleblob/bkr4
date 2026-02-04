@@ -52,6 +52,9 @@
                           <RouterLink to="/page/dp" class="hover:underline">Data Protection Policy</RouterLink>
                       </li>
                       <li class="mb-4">
+                          <RouterLink to="/page/accessibility" class="hover:underline">Accessibility Guide</RouterLink>
+                      </li>
+                      <li class="mb-4">
                           <RouterLink to="/page/company" class="hover:underline">Company Details</RouterLink>
                       </li>
                       <li>
