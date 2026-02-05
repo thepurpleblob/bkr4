@@ -4,20 +4,29 @@
 <footer class="bg-neutral-primary-soft">
     <hr class="my-6 border-default sm:mx-auto lg:my-8" />
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div class="md:flex md:justify-between">
-          <div class="mb-6 md:mb-0">
-              <a href="https://www.srps.org.uk/" class="flex items-center">
-                  <img :src="SRPSLogo" class="h-12 me-3" alt="SRPS Logo" />
-                  <span class="text-heading self-center text-2xl font-semibold whitespace-nowrap">SRPS</span>
-              </a>
-          </div>
           <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
-                <h4>The Scottish Railway Preservation Society</h4>
+                <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Contact us</h2>
                 <p>
+                    <b>Scottish Railway Preservation Society</b><br/>
                     operators of Bo'ness & Kinneil Railway and Museum of Scottish Railways,
                     is a Scottish Charity, SC002375, regulated by the Scottish Charity Regulator (OSCR)
-                </p>                
+                </p>   
+                <ul class="text-body font-medium mt-4">
+                    <li>
+                        <a href="tel:01506825855">
+                            <Icon icon="streamline-freehand:phone-retro-1" class="inline" width="1.2em" height="1.2em" /> 01506 825855
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:enquiries.railway@srps.org.uk">
+                            <Icon icon="streamline-freehand:email-action-download" class="inline" width="1.2em" height="1.2em" /> enquiries.railway@srps.org.uk
+                        </a>
+                    </li>
+                </ul> 
+                <p class="mt-4"><a href="https://bkrailway.us3.list-manage.com/subscribe?u=39208c212e4ffc9b9f7acd39a&id=5eaf26d110" target="_mailchimp" class="text-fg-brand hover:underline">
+                    <b>Join our mailing list...</b>
+                </a></p>            
               </div>
               <div>
                   <h2 class="mb-6 text-sm font-semibold text-heading uppercase">SRPS Sites</h2>
@@ -46,8 +55,11 @@
                   </ul>
               </div>
               <div>
-                  <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Legal</h2>
+                  <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Important</h2>
                   <ul class="text-body font-medium">
+                      <li class="mb-4">
+                          <RouterLink to="/faq" class="hover:underline">FAQs</RouterLink>
+                      </li>
                       <li class="mb-4">
                           <RouterLink to="/page/dp" class="hover:underline">Data Protection Policy</RouterLink>
                       </li>
@@ -63,25 +75,22 @@
                   </ul>
               </div>
           </div>
-      </div>
       <hr class="my-6 border-default sm:mx-auto lg:my-8" />
       <div class="sm:flex sm:items-center sm:justify-between">
           <span class="text-sm text-body sm:text-center">© {{ year }} <a href="https://www.srps.org.uk/" class="hover:underline">SRPS</a>. All Rights Reserved.
           </span>
           <div class="flex mt-4 sm:justify-center sm:mt-0">
             <a href="https://www.facebook.com/BonessKinneilRailway/" class="text-body hover:text-heading">
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/></svg>
+                <Icon icon="streamline-logos:facebook-logo-2-solid" width="1.2em" height="1.2em" />
                 <span class="sr-only">Facebook page</span>
             </a>
             <a href="https://www.instagram.com/bonesskinneilrailway/" class="text-body hover:text-heading ms-5">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
-                </svg>
+                <Icon icon="streamline-logos:instagram-logo-2-solid" width="1.2em" height="1.2em" />
                 <span class="sr-only">Instagram</span>
             </a>
             <a href="https://twitter.com/bonessrailway" class="text-body hover:text-heading ms-5">
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/></svg>
-            <span class="sr-only">Twitter page</span>
+                <Icon icon="streamline-logos:x-twitter-logo-solid" width="1.2em" height="1.2em" />
+                <span class="sr-only">Twitter page</span>
             </a>
           </div>
       </div>
@@ -93,6 +102,7 @@
 <script setup>
     import { ref } from 'vue';
     import SRPSLogo from '@/assets/SRPSLogo.png';
+    import { Icon } from '@iconify/vue';
 
     const year = new Date().getFullYear();
 </script>
