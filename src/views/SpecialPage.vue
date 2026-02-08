@@ -2,7 +2,7 @@
     <h1 class="text-center text-4xl font-bold text-heading mb-8">SOMETHING SPECIAL</h1>
 
     <div v-for="event in events" class="card lg:card-side bg-base-100 shadow-md/20 mb-8">
-        <figure>
+        <figure class="pl-2">
             <CmsImage :filename="event.Image" :width="300"></CmsImage>
         </figure>
         <div class="card-body text-base">

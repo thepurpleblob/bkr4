@@ -1,5 +1,5 @@
 <template>
-    <div class="card lg:card-side bg-base-100 shadow-sm">
+    <div class="card lg:card-side bg-base-100 shadow-md/20">
         <figure>
             <img
             class="object-right"
@@ -7,7 +7,7 @@
             alt="BKR Guard" />
         </figure>
         <div class="card-body">
-            <h2 class="card-title text-2xl font-bold text-headin">How to get here</h2>
+            <h2 class="card-title text-2xl font-bold text-heading uppercase">How to get here</h2>
             <hr class="h-px my-3 bg-neutral-quaternary border-0">
             <div class="grid grid-cols-1 sm:grid-cols-2">
                 <div>
