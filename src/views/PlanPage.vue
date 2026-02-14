@@ -1,28 +1,10 @@
 <template>
     <h1 class="text-center text-4xl font-bold text-heading mb-8">PLAN YOUR VISIT</h1>
 
-    <div class="mb-4">
+    <div class="mb-4 w-full">
         <FaresBlock></FaresBlock>
     </div>
-    <div class="mb-4 flex gap-2 justify-evenly">
-
-        <!-- Accessibility -->
-        <div class="card bg-base-100 image-full w-96 shadow-sm">
-            <figure>
-                <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes" />
-            </figure>
-            <div class="card-body">
-                <h2 class="card-title">ACCESSIBILITY GUIDE</h2>
-                <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-                <div class="card-actions justify-end">
-                <button class="btn btn-primary" @click="$router.push('/events')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-
+    <div class="mb-4 grid grid-cols-2 lg:grid-cols-4 gap-2 justify-evenly">
         <FBCard
             :imgsrc="greensteamengineURL"
             title="TIMETABLES 2026"
@@ -31,9 +13,9 @@
         ></FBCard>
 
         <FBCard
-            :imgsrc="SteamSignalboxURL"
+            :imgsrc="afternoonteaURL"
             title="SPECIAL EVENTS 2026"
-            content="Answers to the questions we're often asked. If you can't find what you're looking for please don't hesitate to get in touch."
+            content="Our current special events for 2026."
             to="/events"
         ></FBCard>
 
@@ -42,6 +24,13 @@
             title="FAQs"
             content="Answers to the questions we're often asked. If you can't find what you're looking for please don't hesitate to get in touch."
             to="/faq"
+        ></FBCard>
+
+        <FBCard
+            :imgsrc="accessibilityURL"
+            title="Acessibility"
+            content="Our accessibility guide."
+            to="/page/accessibility"
         ></FBCard>
 
     </div>
@@ -58,6 +47,8 @@
     // Images.
     import SteamSignalboxURL from '../assets/SteamSignalbox.jpg';
     import greensteamengineURL from '../assets/greensteamengine.jpg';
+    import accessibilityURL from '../assets/accessibility.jpg';
+    import afternoonteaURL from '../assets/afternoontea.jpg';
 
     const bgstyle = computed(() => "background-image: url(" + PlanBanner + ")");
 </script>
