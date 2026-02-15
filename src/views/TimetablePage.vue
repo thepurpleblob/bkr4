@@ -7,7 +7,7 @@
         <MonthBlock v-for="month in monthlist" :year="month.year" :month="month.month" :single="false" @eventclick="event_clicked"></MonthBlock>
     </div>
 
-    <TimetableModal :show="showmodal" :id="timetableid" :title="itemtitle" :single="singlemonth" :color="color" @close="showmodal = false"></TimetableModal>
+    <TimetableModal :show="showmodal" :id="timetableid" :title="itemtitle" :single="singlemonth" :color="color" :inpast="dateinpast" @close="showmodal = false"></TimetableModal>
 </template>
 
 <script setup>
@@ -24,6 +24,7 @@
     const itemtitle = ref('');
     const { width, height } = useWindowSize();
     const monthlist = ref([]);
+    const dateinpast = ref(false);
 
     const singlemonth = computed(() => {
         return width.value < 500;
@@ -49,6 +50,12 @@
         timetableid.value = item.Timetable;
         color.value = item.Color;
         itemtitle.value = item.Title;
+
+        // Check if selected date is in the past (no booking)
+        const now = Date.now();
+        const selectdate = Date.parse(item.date);
+        dateinpast.value = now > selectdate;
+
         showmodal.value = true;
     }
 

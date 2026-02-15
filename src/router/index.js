@@ -36,39 +36,20 @@ const routes = [
     name: 'FAQPage',
     component: () => import( '@/views/FAQPage.vue')
   },
-
-  /*
   {
-    path: '/birkhill',
-    redirect: '/page/birkhill',
+    path: '/museum',
+    name: 'Museum',
+    beforeEnter() {location.href = 'https://museumofscottishrailways.org.uk/'}
   },
-  {
-    path: '/page/:slug',
-    name: 'Page',
-    component: () => import('@/views/PageOther.vue')
-  },
-  {
-    path: '/fares',
-    name: 'FaresTimes',
-    component: () => import('@/views/FaresTimes.vue')
-  },
-  {
-    path: '/plan',
-    name: 'PlanVisit',
-    component: () => import( '@/views/PlanVisit.vue')
-  },
-  {
-    path: '/news',
-    name: 'NewsItems',
-    component: () => import('@/views/NewsItems.vue')
-  },
-
-  */
 ]
 
 const router = createRouter({
   history: createMemoryHistory(),
+  scrollBehavior(to, from, savedPosition) {
+      // always scroll to top
+      return { top: 0 }
+  },
   routes
-})
+});
 
 export default router

@@ -11,7 +11,7 @@
                     <b>Scottish Railway Preservation Society</b><br/>
                     operators of Bo'ness & Kinneil Railway and Museum of Scottish Railways,
                     is a Scottish Charity, SC002375, regulated by the Scottish Charity Regulator (OSCR)
-                </p>   
+                </p>
                 <ul class="text-body font-medium mt-4">
                     <li>
                         <a href="tel:01506825855">
@@ -23,10 +23,10 @@
                             <Icon icon="streamline-freehand:email-action-download" class="inline" width="1.2em" height="1.2em" /> enquiries.railway@srps.org.uk
                         </a>
                     </li>
-                </ul> 
+                </ul>
                 <p class="mt-4"><a href="https://bkrailway.us3.list-manage.com/subscribe?u=39208c212e4ffc9b9f7acd39a&id=5eaf26d110" target="_mailchimp" class="text-fg-brand hover:underline">
                     <b>Join our mailing list...</b>
-                </a></p>            
+                </a></p>
               </div>
               <div>
                   <h2 class="mb-6 text-sm font-semibold text-heading uppercase">SRPS Sites</h2>
@@ -57,16 +57,16 @@
               <div>
                   <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Important</h2>
                   <ul class="text-body font-medium">
-                      <li class="mb-4">
+                      <li>
                           <RouterLink to="/faq" class="hover:underline">FAQs</RouterLink>
                       </li>
-                      <li class="mb-4">
+                      <li>
                           <RouterLink to="/page/dp" class="hover:underline">Data Protection Policy</RouterLink>
                       </li>
-                      <li class="mb-4">
+                      <li>
                           <RouterLink to="/page/accessibility" class="hover:underline">Accessibility Guide</RouterLink>
                       </li>
-                      <li class="mb-4">
+                      <li>
                           <RouterLink to="/page/company" class="hover:underline">Company Details</RouterLink>
                       </li>
                       <li>

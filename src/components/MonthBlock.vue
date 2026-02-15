@@ -42,7 +42,7 @@
         <div class="grid grid-cols-2">
             <div v-for="timetable in timetables" class="flex items-center">
                 <a @click.prevent="event_clicked(timetable)">
-                    <CalButton :color="timetable.Color" :value="timetable.Title" class="mr-2">&nbsp;</CalButton> 
+                    <CalButton :color="timetable.Color" :value="timetable.Title" class="mr-2">&nbsp;</CalButton>
                 </a>
                 <a @click.prevent="event_clicked(timetable)">
                     {{ timetable.Title }}
@@ -60,7 +60,7 @@
     import CalButton from '../flowbite/CalButton.vue';
 
     // Contains all the entries for the calendar table
-    // 5x7 = 35 entries. 
+    // 5x7 = 35 entries.
     const cmsdays = ref(Array(35).fill(null));
 
     // Contains entry for each different colour
@@ -93,7 +93,10 @@
      * One of the event buttons has been clicked
      */
     function event_clicked(item) {
-        emits('eventclick', item);
+        console.log(item);
+        if ('Color' in item) {
+            emits('eventclick', item);
+        }
     }
 
     /**
@@ -152,10 +155,10 @@
     // Fill cmsdays array with entries for each day. May contain
     // * null (if outside of the month)
     // * { daynum: n } if a day with no services
-    // * Calendar object + daynum field, if a day WITH a service. 
+    // * Calendar object + daynum field, if a day WITH a service.
     function fill_cmsdays(items) {
 
-        // Empty the array. 
+        // Empty the array.
         cmsdays.value = Array(35).fill(null);
 
         // Fill array with valid day numbers
@@ -176,7 +179,7 @@
     }
 
     /**
-     * Get unique list of colors / descriptions 
+     * Get unique list of colors / descriptions
      */
     function fill_timetable(items) {
         timetables.value = {};

@@ -80,13 +80,13 @@
                             <p v-else>Information will be available soon.</p>
                         </div>
                     </div>
-                    
+
                     <!-- Link to additional info -->
                     <div  class="flex gap-2 justify-center">
                         <RouterLink v-if="timetable.link" :to="timetable.link" @click="emits('close')">
                             <FButton color="success">Learn more...</FButton>
                         </RouterLink>
-                        <a v-if="timetable.ticketlink" :href="timetable.ticketlink" @click="emits('close')" target="_digitickets">
+                        <a v-if="timetable.ticketlink && !inpast" :href="timetable.ticketlink" @click="emits('close')" target="_digitickets">
                             <FButton color="danger">Book now...</FButton>
                         </a>
                     </div>
@@ -115,6 +115,7 @@
         title: String,
         single: Boolean,
         color: String,
+        inpast: Boolean,
     });
 
     const emits = defineEmits([
