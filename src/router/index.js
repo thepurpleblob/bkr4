@@ -44,7 +44,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
       // always scroll to top
       return { top: 0 }
