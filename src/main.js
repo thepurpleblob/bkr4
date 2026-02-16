@@ -8,7 +8,7 @@ const app = createApp(App);
 app.use(router);
 app.use(VueMatomo, {
             // Configure your matomo server and site by providing
-            host: 'http://matomo.srps.org.uk/',
+            host: 'https://matomo.srps.org.uk/',
             siteId: 1,
         });
 app.mount('#app');
