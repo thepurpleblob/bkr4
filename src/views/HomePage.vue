@@ -11,7 +11,7 @@
 
         <CarouselBlock></CarouselBlock>
 
-        <div class="my-4 grid grid-cols-3 gap-2 justify-items-center">
+        <div class="my-4 grid grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center">
             <FBCard
                 :imgsrc="greensteamengineURL"
                 title="TIMETABLES 2026"
@@ -20,7 +20,7 @@
             ></FBCard>
 
             <FBCard
-                :imgsrc="museumURL"
+                :imgsrc="saxasaltURL"
                 title="PLAN YOUR VISIT"
                 content="Find out about fares, bookings and how to get here."
                 to="/plan"
@@ -50,6 +50,7 @@
     // Images
     import greensteamengineURL from '../assets/greensteamengine.jpg';
     import museumURL from '../assets/museum.png';
+    import saxasaltURL from '../assets/saxasalt.jpg';
 
     const loading = ref(true);
     const page = ref({});
