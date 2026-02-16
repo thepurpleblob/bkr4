@@ -10,7 +10,10 @@
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
                 <li v-for="item in menu">
                     <RouterLink v-if="active == item.name" :to="item.link" :class="activecss" aria-current="page">{{ item.display }}</RouterLink>
-                    <RouterLink v-else :to="item.link" :class="inactivecss" >{{ item.display }}</RouterLink>                    
+                    <RouterLink v-else :to="item.link" :class="inactivecss" >{{ item.display }}</RouterLink>
+                </li>
+                <li>
+                    <button class="btn btn-primary" @click="buy_tickets">Buy tickets</button>
                 </li>
             </ul>
             </div>
@@ -22,9 +25,10 @@
     import BKLogo from '@/assets/bklogo.png';
     import { ref, onMounted, watch } from 'vue';
     import { initCollapses } from 'flowbite';
-    import { RouterLink, useRoute } from 'vue-router';
+    import { RouterLink, useRoute, useRouter } from 'vue-router';
 
     const route = useRoute();
+    const router = useRouter();
     const active = ref('');
 
     const activecss = "block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0";
@@ -74,5 +78,9 @@
 
     onMounted(() => {
         initCollapses();
-    })
+    });
+
+    function buy_tickets() {
+        router.push('/buytickets');
+    }
 </script>

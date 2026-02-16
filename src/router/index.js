@@ -41,6 +41,11 @@ const routes = [
     name: 'Museum',
     beforeEnter() {location.href = 'https://museumofscottishrailways.org.uk/'}
   },
+  {
+    path: '/buytickets',
+    name: 'Digitickets',
+    beforeEnter() {location.href = 'https://bkrailway.digitickets.co.uk/tickets'}
+  },
 ]
 
 const router = createRouter({
