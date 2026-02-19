@@ -52,6 +52,10 @@
     @apply space-y-1 text-body list-disc list-inside mb-5;
 }
 
+.bkrpage ol {
+    @apply max-w-md space-y-2 text-body list-decimal list-inside mb-5;
+}
+
 .bkrpage .card {
     @apply w-full bg-neutral-primary-soft p-6 border border-default rounded-base shadow-xs mb-4;
 }
