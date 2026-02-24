@@ -35,6 +35,9 @@
                           <a href="https://www.srps.org.uk/" class="hover:underline">Scottish Railway Preservation Society</a>
                       </li>
                       <li>
+                          <a href="https://museumofscottishrailways.org.uk/" class="hover:underline">Museum of Scottish Railways</a>
+                      </li>
+                      <li>
                           <a href="https://www.srps.org.uk/railtours/" class="hover:underline">SRPS Railtours</a>
                       </li>
                       <li>
