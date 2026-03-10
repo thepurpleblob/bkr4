@@ -2,7 +2,8 @@
     <div class="container">
         <div v-if="validcontent">
             <h1 v-html="title" class="text-center mb-4 text-3xl font-bold tracking-tight text-heading "></h1>
-            <div v-html="content" class="bkrpage"></div>
+            <article class="prose" v-html="content"></article>
+            <!-- <div v-html="content" class="bkrpage"></div> -->
 
 
             <div v-if="video" class="w-full overflow-hidden mt-5" >
