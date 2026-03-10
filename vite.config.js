@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import vueDevTools from 'vite-plugin-vue-devtools';
 import { fileURLToPath, URL } from 'url';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from '@tailwindcss/vite';
@@ -7,6 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   plugins: [
     vue(),
+    vueDevTools(),
     tailwindcss(),
   ],
   resolve: {

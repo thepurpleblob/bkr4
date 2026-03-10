@@ -23,6 +23,7 @@
     "@iconify/vue": "^5.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "@vitejs/plugin-vue": "^6.0.1",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-plugin-vue-devtools": "^8.0.7"
   }
 }

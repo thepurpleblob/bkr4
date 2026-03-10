@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!loading" class="card lg:card-side bg-base-100 shadow-md/20 bkrpage">
+    <div v-if="!loading" class="card lg:card-side bg-base-100 shadow-md/20 prose max-w-none">
         <figure>
             <img
             :src="SteamOnHillURL"
