@@ -7,6 +7,10 @@ const routes = [
     component: () => import('@/views/HomePage.vue')
   },
   {
+    path: '/birkhill',
+    redirect: '/page/birkhill',
+  },
+  {
     path: '/timetable',
     name: 'TimetablePage',
     component: () => import('@/views/TimetablePage.vue')
