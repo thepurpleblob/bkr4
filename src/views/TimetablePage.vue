@@ -1,5 +1,6 @@
 <template>
     <h1 class="text-center text-4xl font-bold text-heading">TIMETABLE</h1>
+    <div class="text-center text-xl my-5 font-semibold">Click on a coloured square to see the full timetable for that day.</div>
     <div v-if="singlemonth && year">
         <MonthBlock :year="year" :month="monthnow" :single="true" @eventclick="event_clicked" @monthup="monthup" @monthdown="monthdown"></MonthBlock>
     </div>
