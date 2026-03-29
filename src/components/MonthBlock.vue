@@ -53,11 +53,12 @@
 </template>
 
 <script setup>
-    import { ref, defineProps, defineEmits, onMounted, computed, watch } from 'vue';
+    import { ref, defineProps, defineEmits, onMounted, computed, watch, nextTick } from 'vue';
     import ky from 'ky';
     import FButton from '../flowbite/FButton.vue';
     import CalendarCell from './CalendarCell.vue';
     import CalButton from '../flowbite/CalButton.vue';
+    import { initTooltips } from 'flowbite';
 
     // Contains all the entries for the calendar table
     // 5x7 = 35 entries.
@@ -93,7 +94,6 @@
      * One of the event buttons has been clicked
      */
     function event_clicked(item) {
-        console.log(item);
         if ('Color' in item) {
             emits('eventclick', item);
         }
@@ -224,4 +224,9 @@
     onMounted(() => {
         load_month_data();
     });
+
+    watch(cmsdays, async () => {
+        await nextTick()
+        initTooltips()
+    })
 </script>

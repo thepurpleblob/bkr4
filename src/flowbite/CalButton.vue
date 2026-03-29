@@ -1,7 +1,12 @@
 <template>
-    <button type="button" :title="props.value" :class="classes" class="w-12 text-body border border-default hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+    <button type="button" :data-tooltip-target="id" :class="classes" v-bind="$attrs" class="w-12 text-body border border-default hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
         <slot></slot>
     </button>
+
+    <div :id="id" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+        {{ value }}
+        <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
 </template>
 
 <script setup>
@@ -16,6 +21,9 @@
             type: String,
             default: '',
         },
+        id: {
+            type: String,
+        }
     });
 
     const classes = computed(() => {

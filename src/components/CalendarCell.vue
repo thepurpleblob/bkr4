@@ -1,8 +1,8 @@
 <template>
-    <CalButton v-if="item && item.Color" :color="item.Color">
+    <CalButton v-if="item && item.Color" :color="item.Color" :id="'ttooltip' + item.id" :value="item.Title">
         {{ item.daynum }}
     </CalButton>
-    <CalButton v-if="item && item.daynum && !item.Color" color="default">
+    <CalButton v-if="item && item.daynum && !item.Color" color="default" :id="'ttooltip' + item.id" value="No services">
         {{ item.daynum }}
     </CalButton>
 </template>
