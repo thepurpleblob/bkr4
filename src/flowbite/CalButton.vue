@@ -35,10 +35,17 @@
         };
 
         const color = props.color;
+        let classes = [];
         if (color in colors) {
-            return colors[color];
+            classes = colors[color];
         } else {
-            return colors['default'];
+            classes = colors['default'];
         }
+
+        if (props.color !== 'default') {
+            classes.push('cursor-pointer');
+        } 
+
+        return classes;
     });
 </script>
