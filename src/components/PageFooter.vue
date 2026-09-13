@@ -79,6 +79,12 @@
               </div>
           </div>
       <hr class="my-6 border-default sm:mx-auto lg:my-8" />
+      <div class="flex flex-wrap items-center justify-center gap-6">
+          <a href="https://www.raildays.org/" target="_blank" rel="noopener noreferrer">
+              <img :src="FindUsOnRaildays" alt="Find us on Raildays" class="h-32 w-auto" />
+          </a>
+      </div>
+      <hr class="my-6 border-default sm:mx-auto lg:my-8" />
       <div class="sm:flex sm:items-center sm:justify-between">
           <span class="text-sm text-body sm:text-center">© {{ year }} <a href="https://www.srps.org.uk/" class="hover:underline">SRPS</a>. All Rights Reserved.
           </span>
@@ -105,6 +111,7 @@
 <script setup>
     import { ref } from 'vue';
     import SRPSLogo from '@/assets/SRPSLogo.png';
+    import FindUsOnRaildays from '@/assets/find-us-on-raildays.png';
     import { Icon } from '@iconify/vue';
 
     const year = new Date().getFullYear();
