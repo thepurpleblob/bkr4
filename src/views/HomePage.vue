@@ -9,6 +9,8 @@
 
         <h1 class="text-center text-4xl font-bold text-heading mb-3">A great day out the old fashioned way.</h1>
 
+        <HeroImage :page="page" class="mb-4"></HeroImage> 
+
         <CarouselBlock></CarouselBlock>
 
         <div class="my-4 grid grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center">
@@ -51,6 +53,7 @@
     import greensteamengineURL from '../assets/greensteamengine.jpg';
     import museumURL from '../assets/museum.png';
     import saxasaltURL from '../assets/saxasalt.jpg';
+    import HeroImage from '../components/HeroImage.vue';
 
     const loading = ref(true);
     const page = ref({});
