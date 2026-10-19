@@ -17,7 +17,7 @@
                 </FButton>
             </div>
         </div>
-        <table class="w-full mb-4 table-fixed">
+        <table class="w-full mb-4 table-fixed border-separate border-spacing-1">
             <thead>
                 <tr class="mb-2">
                     <th>Mon</th>
@@ -165,7 +165,8 @@
         let day = 1;
         const padding = firstday.value === 0 ? 6 : firstday.value - 1;
         for (let i = padding + 1; i < daysinmonth.value + padding + 1; i++) {
-            cmsdays.value[i] = {daynum: day++};
+            const date = `${props.year}-${String(props.month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            cmsdays.value[i] = {daynum: day++, date};
         }
 
         // Overwrite days with event items.
