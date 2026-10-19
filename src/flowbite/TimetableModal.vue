@@ -101,7 +101,7 @@
 </template>
 
 <script setup>
-    import { ref, defineProps, defineEmits, watch, computed } from 'vue';
+    import { ref, defineProps, defineEmits, watch, computed, onMounted } from 'vue';
     import { RouterLink } from 'vue-router';
     import ky from 'ky';
     import { Modal } from 'flowbite';
@@ -123,6 +123,7 @@
     ]);
 
     const timetable = ref({});
+    let modal;
 
     const dots = '<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">'
         + '<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 12h.01m6 0h.01m5.99 0h.01"/>'
@@ -178,20 +179,24 @@
         });
     }
 
-    watch(() => props.show, (newshow) => {
+    function show_modal() {
+        modal.show();
+        if (props.id) {
+            get_timetable();
+        }
+    }
 
-        // set the modal menu element
+    onMounted(() => {
         const $targetEl = document.getElementById('timetable-modal');
-        const options = {
-            closable: false,
-        };
-        const modal = new Modal($targetEl, options);
+        modal = new Modal($targetEl, {closable: false});
+        if (props.show) {
+            show_modal();
+        }
+    });
 
+    watch(() => props.show, (newshow) => {
         if (newshow) {
-            modal.show();
-            if (props.id) {
-                get_timetable();
-            }
+            show_modal();
         } else {
             modal.hide();
         }

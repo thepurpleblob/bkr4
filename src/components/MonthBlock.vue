@@ -42,7 +42,7 @@
         <div class="grid grid-cols-2">
             <div v-for="timetable in timetables" class="flex items-center">
                 <a @click.prevent="event_clicked(timetable)">
-                    <CalButton :color="timetable.Color" :value="timetable.Title" class="mr-2">&nbsp;</CalButton>
+                    <CalButton :color="timetable.Color" :value="timetable.Title" class="mr-2" :class="{ 'opacity-50': timetable.allPast }">&nbsp;</CalButton>
                 </a>
                 <a @click.prevent="event_clicked(timetable)">
                     {{ timetable.Title }}
@@ -184,8 +184,15 @@
      */
     function fill_timetable(items) {
         timetables.value = {};
+        const now = new Date();
+        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
         items.forEach(item => {
-            timetables.value[item.Color] = item;
+            const isPast = item.date.slice(0, 10) < today;
+            if (timetables.value[item.Color]) {
+                timetables.value[item.Color].allPast &&= isPast;
+            } else {
+                timetables.value[item.Color] = {...item, allPast: isPast};
+            }
         });
     }
 
