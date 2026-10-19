@@ -2,8 +2,8 @@
     <h1 class="text-center text-4xl font-bold text-heading mb-8">EVENTS</h1>
 
     <div v-for="event in events" class="card lg:card-side bg-base-100 shadow-md/20 mb-8">
-        <figure class="pl-2">
-            <CmsImage :filename="event.Image" :width="300"></CmsImage>
+        <figure class="event-image-frame">
+            <CmsImage :filename="event.Image" :width="600" class="event-image"></CmsImage>
         </figure>
         <div class="card-body text-base">
             <h2 class="card-title text-xl font-bold text-heading">{{ event.Title }}</h2>
@@ -43,3 +43,28 @@
         });
     })
 </script>
+
+<style scoped>
+.event-image-frame {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border: 1px solid var(--color-default);
+    border-radius: 0.25rem;
+    background: var(--color-neutral-secondary-soft);
+}
+
+.event-image-frame :deep(.event-image) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+    .event-image-frame {
+        width: 18rem;
+        flex: 0 0 18rem;
+    }
+}
+</style>
