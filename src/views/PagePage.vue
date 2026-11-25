@@ -2,7 +2,7 @@
     <div class="container">
         <div v-if="validcontent">
             <h1 v-html="title" class="text-center mb-4 text-3xl font-bold tracking-tight text-heading "></h1>
-            <CarouselBlock v-if="carouselItems.length" :items="carouselItems" contain :show-indicators="false" :interval="5000" class="mb-4"></CarouselBlock>
+            <CarouselBlock v-if="carouselItems.length" :items="carouselItems" contain :show-indicators="false" :show-controls="false" :interval="5000" class="mb-4"></CarouselBlock>
             <article class="prose max-w-none" v-html="content"></article>
             <!-- <div v-html="content" class="bkrpage"></div> -->
 
