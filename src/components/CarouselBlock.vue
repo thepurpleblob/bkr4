@@ -7,8 +7,8 @@
             </div>
         </div>
         <!-- Slider indicators -->
-        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-            <button v-for="(item, index) in slides" :key="item.id" type="button" class="w-3 h-3 rounded-base" :class="contain ? (activeIndex === index ? 'bg-neutral-800 ring-1 ring-white' : 'bg-neutral-400 ring-1 ring-white hover:bg-neutral-600') : (activeIndex === index ? 'bg-white dark:bg-gray-800' : 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800')" :aria-current="activeIndex === index" :aria-label="'Slide ' + (index + 1)" @click="carousel?.slideTo(index)"></button>
+        <div v-if="showIndicators" class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            <button v-for="(item, index) in slides" :key="item.id" type="button" class="w-3 h-3 rounded-base" :class="activeIndex === index ? 'bg-white dark:bg-gray-800' : 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800'" :aria-current="activeIndex === index" :aria-label="'Slide ' + (index + 1)" @click="carousel?.slideTo(index)"></button>
         </div>
         <!-- Slider controls -->
         <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" @click="carousel?.prev()">
@@ -39,6 +39,10 @@
         contain: {
             type: Boolean,
             default: false,
+        },
+        showIndicators: {
+            type: Boolean,
+            default: true,
         },
     });
 
