@@ -44,6 +44,10 @@
             type: Boolean,
             default: true,
         },
+        interval: {
+            type: Number,
+            default: 3000,
+        },
     });
 
     const homeItems = ref([]);
@@ -60,7 +64,7 @@
         const elements = element.querySelectorAll('[data-carousel-item]');
         const instance = new Carousel(element,
             Array.from(elements, (el, position) => ({ el, position })),
-            { onChange: current => { activeIndex.value = current.getActiveItem().position; } }
+            { interval: props.interval, onChange: current => { activeIndex.value = current.getActiveItem().position; } }
         );
         carousel.value = instance;
         instance.cycle();
