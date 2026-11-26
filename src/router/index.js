@@ -21,6 +21,11 @@ const routes = [
     component: () => import('@/views/PagePage.vue')
   },
   {
+    path: '/santa-availability-demo',
+    name: 'SantaAvailabilityDemo',
+    component: () => import('@/components/SantaAvailability.vue')
+  },
+  {
     path: '/events',
     name: 'EventsPage',
     component: () => import('@/views/EventsPage.vue')
