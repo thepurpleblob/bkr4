@@ -12,6 +12,19 @@ social platforms may also cache older previews. Pages without a carousel or
 matching event image use the default railway image. The Nginx configuration
 serves the generated metadata for page URLs.
 
+For optional page-specific previews, add these nullable fields to the Directus
+`Page` collection and allow the public role to read them:
+
+- `og_title`: text; the complete social preview title.
+- `og_description`: plain text; the social preview description.
+- `og_image`: a single Directus file/image field; the selected image must be
+  publicly accessible.
+
+These fields also control the Twitter card. Blank or missing fields fall back
+independently to the existing title, description and carousel/event/default
+image choices. The fields are optional and need not exist in Directus. Rebuild
+and deploy after adding them or changing their values.
+
 ## DigiTickets: initial authentication
 
 Documentation link: https://api-doc.digitickets.co.uk/v2

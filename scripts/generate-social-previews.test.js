@@ -50,6 +50,52 @@ test('generates distinct crawler-visible previews and chooses page images', asyn
     assert.equal(await readFile(path.join(options.distDir, 'social-preview.jpg'), 'utf8'), 'image');
 });
 
+test('uses optional page social fields and falls back independently when blank or absent', async t => {
+    const options = await fixture(t);
+    const pages = [
+        {
+            slug: 'custom', Title: 'Page title', carousel_items: [{ image: 'carousel' }],
+            og_title: '  A & B  ', og_description: '  Special "description"  ', og_image: 'custom-image',
+        },
+        {
+            slug: 'fallback', Title: 'Fallback', carousel_items: [{ image: 'carousel' }],
+            og_title: '  ', og_description: null, og_image: '',
+        },
+    ];
+    const fetchImpl = async url => {
+        if (url.pathname.endsWith('/Page')) {
+            assert.equal(url.searchParams.get('fields'), '*,carousel_items.image');
+        }
+        return { ok: true, json: async () => ({ data: url.pathname.endsWith('/Page') ? pages : [] }) };
+    };
+
+    await generateSocialPreviews({ ...options, fetchImpl });
+    const custom = await readFile(path.join(options.distDir, 'page/custom.html'), 'utf8');
+    const fallback = await readFile(path.join(options.distDir, 'page/fallback.html'), 'utf8');
+    assert.match(custom, /og:title" content="A &amp; B"/);
+    assert.match(custom, /twitter:title" content="A &amp; B"/);
+    assert.match(custom, /og:description" content="Special &quot;description&quot;"/);
+    assert.match(custom, /twitter:description" content="Special &quot;description&quot;"/);
+    assert.match(custom, /og:image" content="https:\/\/cms\.example\.com\/assets\/custom-image"/);
+    assert.match(custom, /twitter:image" content="https:\/\/cms\.example\.com\/assets\/custom-image"/);
+    assert.match(fallback, /og:title" content="Fallback \| Bo&#39;ness &amp; Kinneil Railway"/);
+    assert.match(fallback, /og:description" content="Find out more about Fallback at the Bo&#39;ness &amp; Kinneil Railway\."/);
+    assert.match(fallback, /og:image" content="https:\/\/cms\.example\.com\/assets\/carousel"/);
+});
+
+test('rejects invalid page social field values', async t => {
+    const options = await fixture(t);
+    const fetchImpl = async url => ({
+        ok: true,
+        json: async () => ({
+            data: url.pathname.endsWith('/Page')
+                ? [{ slug: 'invalid', Title: 'Invalid', carousel_items: [], og_image: {} }]
+                : [],
+        }),
+    });
+    await assert.rejects(generateSocialPreviews({ ...options, fetchImpl }), /Invalid og_image for published page: invalid/);
+});
+
 test('fails the build when the CMS cannot provide published pages', async t => {
     const options = await fixture(t);
     await assert.rejects(

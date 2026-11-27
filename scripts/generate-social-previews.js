@@ -60,7 +60,7 @@ export async function generateSocialPreviews({ distDir, cmsEndpoint, defaultImag
     if (!cmsEndpoint) throw new Error('VITE_CMS_ENDPOINT is required to generate social previews');
 
     const [pages, events, specials] = await Promise.all([
-        getItems(cmsEndpoint, 'Page', 'slug,Title,carousel_items.image', fetchImpl),
+        getItems(cmsEndpoint, 'Page', '*,carousel_items.image', fetchImpl),
         getItems(cmsEndpoint, 'Events', 'Page,Image', fetchImpl),
         getItems(cmsEndpoint, 'Specials', 'Page,Image', fetchImpl),
     ]);
@@ -88,11 +88,19 @@ export async function generateSocialPreviews({ distDir, cmsEndpoint, defaultImag
         }
         const route = `page/${page.slug}`;
         if (previews.has(route)) throw new Error(`Duplicate published page slug: ${page.slug}`);
-        const imageId = page.carousel_items.find(item => typeof item.image === 'string' && item.image)?.image ||
+        for (const field of ['og_title', 'og_description', 'og_image']) {
+            if (page[field] != null && typeof page[field] !== 'string') {
+                throw new Error(`Invalid ${field} for published page: ${page.slug}`);
+            }
+        }
+        const title = page.og_title?.trim() || `${page.Title} | ${siteTitle}`;
+        const description = page.og_description?.trim() || `Find out more about ${page.Title} at the ${siteTitle}.`;
+        const imageId = page.og_image?.trim() ||
+            page.carousel_items.find(item => typeof item.image === 'string' && item.image)?.image ||
             linkedImages.get(page.slug);
         previews.set(route, {
-            title: `${page.Title} | ${siteTitle}`,
-            description: `Find out more about ${page.Title} at the ${siteTitle}.`,
+            title,
+            description,
             image: imageId ? new URL(`/assets/${encodeURIComponent(imageId)}`, cmsEndpoint).href : defaultImage,
         });
     }
