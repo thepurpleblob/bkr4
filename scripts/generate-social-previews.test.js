@@ -30,6 +30,7 @@ test('generates distinct crawler-visible previews and chooses page images', asyn
     const fetchImpl = async url => {
         assert.deepEqual(JSON.parse(url.searchParams.get('filter')), { status: { _eq: 'published' } });
         assert.equal(url.searchParams.get('limit'), '-1');
+        assert.equal(url.searchParams.get('deep[carousel_items][_sort]'), url.pathname.endsWith('/Page') ? 'sort,id' : null);
         return { ok: true, json: async () => ({ data: responses[url.pathname.split('/').pop()] }) };
     };
 

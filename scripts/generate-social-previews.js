@@ -2,6 +2,7 @@ import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadEnv } from 'vite';
+import { pageCarouselSort } from '../src/page-carousel-query.js';
 
 const siteUrl = 'https://www.bkrailway.co.uk';
 const siteTitle = "Bo'ness & Kinneil Railway";
@@ -42,11 +43,12 @@ function renderPreview(template, { title, description, url, image }) {
     return template.replace(marker, tags);
 }
 
-async function getItems(endpoint, collection, fields, fetchImpl) {
+async function getItems(endpoint, collection, fields, fetchImpl, extraParams = {}) {
     const url = new URL(`/items/${collection}`, endpoint);
     url.searchParams.set('fields', fields);
     url.searchParams.set('filter', JSON.stringify({ status: { _eq: 'published' } }));
     url.searchParams.set('limit', '-1');
+    for (const [key, value] of Object.entries(extraParams)) url.searchParams.set(key, value);
     const response = await fetchImpl(url, { signal: AbortSignal.timeout(15000) });
     if (!response.ok) throw new Error(`CMS ${collection} request failed: ${response.status}`);
     const result = await response.json();
@@ -60,7 +62,7 @@ export async function generateSocialPreviews({ distDir, cmsEndpoint, defaultImag
     if (!cmsEndpoint) throw new Error('VITE_CMS_ENDPOINT is required to generate social previews');
 
     const [pages, events, specials] = await Promise.all([
-        getItems(cmsEndpoint, 'Page', '*,carousel_items.image', fetchImpl),
+        getItems(cmsEndpoint, 'Page', '*,carousel_items.image', fetchImpl, pageCarouselSort),
         getItems(cmsEndpoint, 'Events', 'Page,Image', fetchImpl),
         getItems(cmsEndpoint, 'Specials', 'Page,Image', fetchImpl),
     ]);

@@ -40,6 +40,10 @@ image. Optional HTML in `homepage.videofile_html` appears below the video.
 When no video is set, the existing hero image and text remain in place. The
 homepage fields and video file must also be publicly readable in Directus.
 
+Page carousel images are ordered by ascending `sort`, then by ascending ID.
+Social previews use the first image in that order unless an Open Graph image
+is specified; rebuild and deploy to update those previews.
+
 ## DigiTickets: initial authentication
 
 Documentation link: https://api-doc.digitickets.co.uk/v2

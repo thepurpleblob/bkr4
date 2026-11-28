@@ -25,6 +25,7 @@
     import { useRoute } from 'vue-router';
     import ky from 'ky';
     import CarouselBlock from '../components/CarouselBlock.vue';
+    import { pageCarouselSort } from '../page-carousel-query.js';
     const VideoPlayer = defineAsyncComponent(() => import('../components/VideoPlayer.vue'));
 
     const route = useRoute();
@@ -53,7 +54,7 @@
         }
 
         ky.get(endpoint + '/items/Page', {
-            searchParams: { filter: JSON.stringify(filter), fields: '*,carousel_items.*' },
+            searchParams: { filter: JSON.stringify(filter), fields: '*,carousel_items.*', ...pageCarouselSort },
             signal: controller.signal,
         }).json()
         .then(result => {
