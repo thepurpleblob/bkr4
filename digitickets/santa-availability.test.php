@@ -61,9 +61,15 @@ try {
     };
     check(cachedSantaAvailability($cachePath, $refresh)['updatedAt'] === 'refresh-1', 'Initial refresh failed.');
     check(cachedSantaAvailability($cachePath, $refresh)['updatedAt'] === 'refresh-1', 'Fresh cache was not reused.');
+    touch($cachePath, time() - 29 * 60);
+    clearstatcache(true, $cachePath);
+    check(cachedSantaAvailability($cachePath, $refresh)['updatedAt'] === 'refresh-1', 'Cache expired before 30 minutes.');
+    touch($cachePath, time() - 31 * 60);
+    clearstatcache(true, $cachePath);
+    check(cachedSantaAvailability($cachePath, $refresh)['updatedAt'] === 'refresh-2', 'Cache was not refreshed after 30 minutes.');
     touch($cachePath, time() - SANTA_CACHE_SECONDS);
     clearstatcache(true, $cachePath);
-    check(cachedSantaAvailability($cachePath, $refresh)['updatedAt'] === 'refresh-2', 'Expired cache was not refreshed.');
+    check(cachedSantaAvailability($cachePath, $refresh)['updatedAt'] === 'refresh-3', 'Expired cache was not refreshed.');
     touch($cachePath, time() - SANTA_CACHE_SECONDS);
     clearstatcache(true, $cachePath);
     try {
@@ -78,7 +84,7 @@ try {
     } catch (RuntimeException $error) {
         check(str_contains($error->getMessage(), 'Waiting to retry'), 'Unexpected retry error.');
     }
-    check($calls === 2, 'The failed refresh was retried too soon.');
+    check($calls === 3, 'The failed refresh was retried too soon.');
 } finally {
     if (file_exists($cachePath)) unlink($cachePath);
     if (file_exists($cachePath . '.failure')) unlink($cachePath . '.failure');

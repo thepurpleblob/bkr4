@@ -4,6 +4,7 @@
             <h1 v-html="title" class="text-center mb-4 text-3xl font-bold tracking-tight text-heading "></h1>
             <CarouselBlock v-if="carouselItems.length" :items="carouselItems" contain :show-indicators="false" :show-controls="false" :interval="5000" class="mb-4"></CarouselBlock>
             <article class="prose max-w-none" v-html="content"></article>
+            <SantaAvailability v-if="route.params.slug === 'santasteamtrains'" class="mt-5" />
             <!-- <div v-html="content" class="bkrpage"></div> -->
 
 
@@ -26,6 +27,7 @@
     import ky from 'ky';
     import CarouselBlock from '../components/CarouselBlock.vue';
     import { pageCarouselSort } from '../page-carousel-query.js';
+    const SantaAvailability = defineAsyncComponent(() => import('../components/SantaAvailability.vue'));
     const VideoPlayer = defineAsyncComponent(() => import('../components/VideoPlayer.vue'));
 
     const route = useRoute();

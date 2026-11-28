@@ -117,7 +117,7 @@ recreated container. A network/DNS error or non-200 DigiTickets response is
 reported as a failure; the command does not save a key in that case. Do not
 paste credentials, API keys or unredacted responses into logs or issue reports.
 
-### Santa availability demo
+### Santa availability
 
 DigiTickets' `GET /v2/sessions` endpoint accepts an `eventCatID` filter, as
 well as `dateStart` and `dateEnd`. It requires the API key as a Bearer token.
@@ -125,11 +125,11 @@ For example, event `42858` returned sessions named "Santa Steam Trains: Standard
 Seating" when queried for 2026–2027. Each session included `sessionID`, `date`,
 `time`, `capacity`, `spacesSold`, `spacesReserved` and `spacesAvailable`.
 
-The unlinked `/santa-availability-demo` route displays December 2026 sessions.
-It is a public URL, not access-controlled; Nginx asks search engines not to
-index it. The current Santa information page is unchanged. The demo reads the
-same-origin `GET /api/santa-availability` endpoint, which returns only dates,
-times, availability labels and the last successful refresh time.
+The Santa information page (`/page/santasteamtrains`) and the unlinked
+`/santa-availability-demo` route display December 2026 sessions. The demo is a
+public URL, not access-controlled; Nginx asks search engines not to index it.
+Both use the same-origin `GET /api/santa-availability` endpoint, which returns
+only dates, times, availability labels and the last successful refresh time.
 
 The endpoint combines standard seating (42858), quiet coach (80632) and private
 compartments (43043) by date and departure time. The quiet coach only runs on
@@ -137,15 +137,12 @@ some departures. The percentage remaining is the sum of `spacesAvailable`
 divided by the sum of `capacity`, multiplied by 100. A departure with missing
 or invalid data in a returned session is shown as Unavailable; a missing
 departure is shown as N/A.
-Confirm that the session-level figures represent the intended ticket availability
-before adding the table to the Santa page.
 
-The temporary thresholds are configured in `digitickets/santa-availability.php`:
-above 50% is Good, above 20% through 50% is Limited, and above zero through 20%
-is Very Low. Zero available is Sold Out. The threshold constants can be changed
-once the actual criteria are agreed.
+The thresholds are configured in `digitickets/santa-availability.php`:
+above 20% is Good, above 6% through 20% is Limited, and above zero through 6%
+is Very Low. Zero available is Sold Out.
 
-Successful results are cached in the container for one hour; a restart clears
+Successful results are cached in the container for 30 minutes; a restart clears
 the cache. A failed refresh returns an error rather than showing expired data,
 and subsequent refresh attempts wait one minute before retrying.
 The API key is never sent to the browser. The demo handles API pagination and

@@ -5,7 +5,7 @@ const SANTA_START = '2026-12-01';
 const SANTA_END = '2026-12-31';
 const SANTA_GOOD_ABOVE_PERCENT = 20;
 const SANTA_LIMITED_ABOVE_PERCENT = 6;
-const SANTA_CACHE_SECONDS = 3600;
+const SANTA_CACHE_SECONDS = 1800;
 const SANTA_RETRY_SECONDS = 60;
 
 function santaNextPage(array $headers, int $page): ?int
