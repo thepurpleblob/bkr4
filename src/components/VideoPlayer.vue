@@ -28,6 +28,7 @@
             autoplay: true,
             controls: true,
             fluid: true,
+            loop: true,
             muted: true,
             preload: 'metadata',
             sources: [{ src: props.src, type: 'video/mp4' }],
