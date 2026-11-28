@@ -9,7 +9,11 @@
 
         <h1 class="text-center text-4xl font-bold text-heading mb-3">A great day out the old fashioned way.</h1>
 
-        <HeroImage :page="page" class="mb-4"></HeroImage> 
+        <div v-if="page.videofile" class="mb-4">
+            <VideoPlayer :src="videoFileUrl" />
+            <div v-if="page.videofile_html" class="prose max-w-none mt-4" v-html="page.videofile_html"></div>
+        </div>
+        <HeroImage v-else :page="page" class="mb-4"></HeroImage>
 
         <CarouselBlock></CarouselBlock>
 
@@ -43,7 +47,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted } from 'vue';
+    import { computed, defineAsyncComponent, ref, onMounted } from 'vue';
     import ky from 'ky';
     import CarouselBlock from '../components/CarouselBlock.vue';
     import FBAlert from '../flowbite/FBAlert.vue';
@@ -55,8 +59,10 @@
     import saxasaltURL from '../assets/saxasalt.jpg';
     import HeroImage from '../components/HeroImage.vue';
 
+    const VideoPlayer = defineAsyncComponent(() => import('../components/VideoPlayer.vue'));
     const loading = ref(true);
     const page = ref({});
+    const videoFileUrl = computed(() => import.meta.env.VITE_CMS_ENDPOINT + '/assets/' + encodeURIComponent(page.value.videofile));
     const alertclass = ref('alert-info');
 
     /**

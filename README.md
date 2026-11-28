@@ -35,6 +35,11 @@ Uploaded videos autoplay muted so browsers can permit playback; viewers can
 unmute them using the controls. The reusable `VideoPlayer` component accepts
 an MP4 URL as its `src` prop.
 
+On the homepage, an uploaded MP4 in `homepage.videofile` replaces the hero
+image. Optional HTML in `homepage.videofile_html` appears below the video.
+When no video is set, the existing hero image and text remain in place. The
+homepage fields and video file must also be publicly readable in Directus.
+
 ## DigiTickets: initial authentication
 
 Documentation link: https://api-doc.digitickets.co.uk/v2
