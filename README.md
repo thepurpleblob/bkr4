@@ -25,6 +25,16 @@ independently to the existing title, description and carousel/event/default
 image choices. The fields are optional and need not exist in Directus. Rebuild
 and deploy after adding them or changing their values.
 
+## Page videos
+
+The optional `Page.videofile` field accepts an uploaded MP4. Its Directus file
+and field must be publicly readable. Pages play it with Video.js; if both
+`videofile` and the existing YouTube `video` embed are set, the uploaded video
+takes precedence. Pages without an uploaded video continue to show the embed.
+Uploaded videos autoplay muted so browsers can permit playback; viewers can
+unmute them using the controls. The reusable `VideoPlayer` component accepts
+an MP4 URL as its `src` prop.
+
 ## DigiTickets: initial authentication
 
 Documentation link: https://api-doc.digitickets.co.uk/v2

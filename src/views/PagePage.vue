@@ -7,7 +7,8 @@
             <!-- <div v-html="content" class="bkrpage"></div> -->
 
 
-            <div v-if="video" class="w-full overflow-hidden mt-5" >
+            <VideoPlayer v-if="videoFile" :src="videoFileUrl" class="mt-5" />
+            <div v-else-if="video" class="w-full overflow-hidden mt-5" >
                 <div v-html="video"></div>
             </div>
         </div>
@@ -20,14 +21,17 @@
 </template>
 
 <script setup>
-    import { ref, watch } from 'vue';
+    import { computed, defineAsyncComponent, ref, watch } from 'vue';
     import { useRoute } from 'vue-router';
     import ky from 'ky';
     import CarouselBlock from '../components/CarouselBlock.vue';
+    const VideoPlayer = defineAsyncComponent(() => import('../components/VideoPlayer.vue'));
 
     const route = useRoute();
     const content = ref('');
     const video = ref('');
+    const videoFile = ref('');
+    const videoFileUrl = computed(() => import.meta.env.VITE_CMS_ENDPOINT + '/assets/' + encodeURIComponent(videoFile.value));
     const title = ref('');
     const carouselItems = ref([]);
     const validcontent = ref(false);
@@ -57,6 +61,7 @@
                 content.value = result.data[0].Content;
                 title.value = result.data[0].Title;
                 video.value = result.data[0].video;
+                videoFile.value = result.data[0].videofile;
                 carouselItems.value = result.data[0].carousel_items;
                 validcontent.value = true;
             }

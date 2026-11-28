@@ -15,6 +15,7 @@
     "flowbite": "^4.0.2",
     "ky": "^1.14.3",
     "tailwindcss": "^4.3.3",
+    "video.js": "^8.24.2",
     "vue": "^3.5.43",
     "vue-matomo": "^4.2.0",
     "vue-router": "^4.6.4"
